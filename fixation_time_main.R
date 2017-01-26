@@ -20,11 +20,11 @@ data.matrix <- as.data.frame(data.matrix)
 colnames(data.matrix) <- paste("Crypt_size_",crypt.sizes,sep="")
 
 write.table(data.matrix,file = "fixation_simulations_number_of_divisions.txt",quote = F,sep="\t",row.names = F)
-
-library("ggplot2")
-
-p <- ggplot(data.matrix, aes(Crypt_size_1))
-p + geom_violin()
+# 
+# library("ggplot2")
+# 
+# p <- ggplot(data.matrix, aes(Crypt_size_1))
+# p + geom_violin()
 
 
 library(vioplot)
@@ -48,12 +48,32 @@ x17 <- data.matrix$Crypt_size_19
 x18 <- data.matrix$Crypt_size_20
 
 
-
+par(las=1,bty="l")  ## my preferred setting
+## set up empty plot
+plot(0:1,0:1,type="n",xlim=c(0.5,18.5),ylim=range((c(x1, x2, x3,
+                                                     x4,
+                                                     x5,
+                                                     x6,
+                                                     x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18))),
+     axes=F,ann=FALSE)
 vioplot(x1, x2, x3,
         x4,
         x5,
         x6,
         x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,
-        names=paste("Crypt size\n",3:20), 
-        col="gold")
+        names=paste("",3:20), 
+        col="gold",add=T)
+axis(side=1,at=1:18,labels=paste("",3:20,sep=""))
+axis(side=2,at=seq(0,7000,1000),labels=seq(0,7000,1000))
+title(ylab="Number of divisions until fixation",xlab="Stem cell compartment population size")
+title("Divisions until fixation among 1000 \nfixation events per population size")
 
+mean.vec <- NULL
+for(i in 1:ncol(data.matrix)){
+  mean.vec[i] <- mean(data.matrix[,i])
+}
+
+points(mean.vec[3:20],pch=8,col="red",cex=2)
+
+plot(mean.vec[3:20]*mutation.rate,pch=8,col="red",cex=2,ylab="Mean divisions until fixation 
+times mutation rate",xlab="Stem cell compartment population size")

@@ -1,3 +1,7 @@
+########Functions script
+#Author: Vincent L. Cannataro
+#Date: Jan 25 2017
+
 ###
 #Simulation of dynamics within the crypt base
 #
@@ -17,7 +21,7 @@
 # background.division.rate <- 0.2 #mouse
 # background.division.rate <- 0.143 #human 
 
-mutation.rate <- 1.26e-4
+# mutation.rate <- 1.26e-4
 
 
 ###Function to randomly pick a neighbor--- outputs the neighbor to replace given the parent 
@@ -116,9 +120,9 @@ fixation_simulation <- function(division_rate=0.2,
   return(output)
 }
 
-simulation_output <- fixation_simulation(pop.size = 10)
-simulation_output[[1]]
-simulation_output[[2]]
-simulation_output[[2]]/simulation_output[[1]]
-
+# simulation_output <- fixation_simulation(pop.size = 20,division_rate = 0.2)
+# simulation_output[[1]]
+# simulation_output[[2]]
+# 
+# mean(simulation_output[[1]])*mutation.rate
 
